@@ -69,13 +69,25 @@ cd /vagrant/catalog/
 ```
 
 ## Step 2:
+### Clone the git repository containing the project files:
+```bash
+git clone https://github.com/thewickk/Udacity_FSND_Project_Two.git
+```
+
+## Step 3:
+### Move the project files into the current catalog directory and remove unneeded folders and files:
+```bash
+cp -R ./Udacity_FSND_Project_Two/* ./ && rm -rf Udacity_FSND_Project_Two && rm README.txt
+```
+
+## Step 2:
 ### Make the automated startup script executable:
 ```bash
 chmod +x init.sh
 ```
 
 ## Step 3:
-### Run the startup script to automate the Python installation and launch the app on port 5000
+### Run the startup script to automate the Python 3.7.1 installation and launch the app on port 5000
 **(Please note this startup script will take several minutes to complete)**
 ```bash
 source init.sh
@@ -83,3 +95,18 @@ source init.sh
 
 ## You can now access the application via your web browser at
 **http://localhost:5000/**
+
+
+## To exit the vagrant environment and kill the running vagrant processes, exit out of the current vagrant terminal and terminate the vagrant environment:
+```bash
+exit
+vagrant halt
+```
+
+# Notes and Troubleshooting:
+* This app has been tested to work in Chrome and Firefox ONLY. This application could exhibit undesirable behaviors or
+possibly not work at all in other web browsers
+* There is an multi-threading issue with the SQLite3 application (SQLite can only handle one thread at a time)
+that causes a programming error when data is written to the database too quickly.
+* This happens when new items have been created, updated, or deleted to quickly. The workaround for this is to wait a short period of time, roughly 15 to 20 seconds before moving through the web pages. Additionally you can repeatedly refresh the current page until the current contents have been flushed and a new thread has been created.
+* If you experience a blank screen after authenticating with your Google account and are not redirected to the home page, please delete your browsing history, quit out of your web browser application and relaunch. This should flush any stored credentials and allow a new Google log in to happen.
