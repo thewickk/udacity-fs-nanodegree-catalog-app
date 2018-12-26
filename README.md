@@ -33,7 +33,7 @@
 
 ## Instructions For Installing Vagrant Virtual Machine
 
-**These instructions, the Vagrant VM, and the SQL database are courtesy of [Udacity.com](https://www.udacity.com) and their [Full Stack Web Developer Nanodegree Program](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)**
+**These instructions, and the Vagrant VM are courtesy of [Udacity.com](https://www.udacity.com) and their [Full Stack Web Developer Nanodegree Program](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)**
 
 * **Install VirtualBox:**
 VirtualBox is the software that actually runs the virtual machine. You do not need the extension pack or the SDK. You do not need to launch VirtualBox after installing it; Vagrant will do that.
@@ -106,7 +106,7 @@ vagrant halt
 # Notes and Troubleshooting:
 * This app has been tested to work in Chrome and Firefox ONLY. This application could exhibit undesirable behaviors or
 possibly not work at all in other web browsers
-* There is an multi-threading issue with the SQLite3 application (SQLite can only handle one thread at a time)
+* There is a multi-threading issue with the SQLite3 application (SQLite can only handle one thread at a time)
 that causes a programming error when data is written to the database too quickly.
 * This happens when new items have been created, updated, or deleted to quickly. The workaround for this is to wait a short period of time, roughly 15 to 20 seconds before moving through the web pages. Additionally you can repeatedly refresh the current page until the current contents have been flushed and a new thread has been created.
 * If you experience a blank screen after authenticating with your Google account and are not redirected to the home page, please delete your browsing history, quit out of your web browser application and relaunch. This should flush any stored credentials and allow a new Google log in to happen.
