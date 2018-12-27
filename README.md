@@ -52,7 +52,7 @@ Alternately, you can use Github to fork and clone the repository [https://github
 
 Either way, you will end up with a new directory containing the VM files. Change to this directory in your terminal with **cd**. Inside, you will find another directory called vagrant. Change directory to the vagrant directory:
 ```bash
-cd /vagrant 
+cd /vagrant
 ```
 
 ## Instructions for starting the Virtual Machine, connecting to the database, and running the Python file
@@ -107,9 +107,5 @@ vagrant halt
 ```
 
 # Notes and Troubleshooting:
-* This app has been tested to work in Chrome and Firefox ONLY. This application could exhibit undesirable behaviors or
-possibly not work at all in other web browsers
-* There is a multi-threading issue with the SQLite3 application (SQLite can only handle one thread at a time)
-that causes a programming error when data is written to the database too quickly.
-* This happens when new items have been created, updated, or deleted to quickly. The workaround for this is to wait a short period of time, roughly 15 to 20 seconds before moving through the web pages. Additionally you can repeatedly refresh the current page until the current contents have been flushed and a new thread has been created.
+* This app has been tested to work in Chrome and Firefox ONLY. This application could exhibit undesirable behaviors or possibly not work at all in other web browsers
 * If you experience a blank screen after authenticating with your Google account and are not redirected to the home page, please delete your browsing history, quit out of your web browser application and relaunch. This should flush any stored credentials and allow a new Google log in to happen.
