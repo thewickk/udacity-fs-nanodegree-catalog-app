@@ -20,6 +20,16 @@ session = DBSession()
 
 # Create dummy data to populate our app with starter data
 
+# Create a inital user:
+user = User(
+    name = 'Johnny Noname',
+    email = 'thewickk@thewickk.com',
+    picture = 'some_pic.jpg'
+)
+
+session.add(user)
+session.commit()
+
 # Baseball Category and Items:
 category = Category(
     name = 'Baseball',

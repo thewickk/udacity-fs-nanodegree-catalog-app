@@ -9,7 +9,7 @@
 			method="post">
 
 				<p>Name:</p>
-					<input type="text" size='30' name="name" placeholder="Enter New Item">
+					<input type="text" size='30' name="name" placeholder="Enter New Item" required>
 
 			<input type="submit" value="Create">
 			<a href="{{ url_for('category_items', category_id=category_id) }}">Cancel</a>

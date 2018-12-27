@@ -25,7 +25,7 @@ class Category(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(80), nullable=False)
     user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship(User)
+    user = relationship(User, backref="category")
 
 #Create category data for our JSON endpoint
     @property
@@ -47,9 +47,9 @@ class CategoryItem(Base):
     description = Column(String(255))
     creation_date = Column(DateTime())
     category_id = Column(Integer, ForeignKey('category.id'))
-    category = relationship(Category)
+    category = relationship(Category, backref=('item'))
     user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship(User)
+    user = relationship(User, backref="item")
 
 #Create category item data for our JSON endpoint
     def serialize(self):

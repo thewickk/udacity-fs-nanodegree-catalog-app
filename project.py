@@ -22,7 +22,8 @@ CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Udacity FSND Catalog Project"
 
-engine = create_engine('sqlite:///database.db')
+engine = create_engine('sqlite:///database.db',
+                       connect_args={'check_same_thread':False})
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -218,7 +219,10 @@ def categories_home():
     category = session.query(Category).all()
     items = session.query(CategoryItem).order_by(CategoryItem.id.desc()).limit(
         5)
-    return render_template('catalog.html', category=category, items=items)
+    if 'username' not in login_session:
+        return render_template('public_catalog.html', category=category, items=items )
+    else:
+        return render_template('catalog.html', category=category, items=items)
 
 
 # Page to add a new category to the app:
@@ -231,7 +235,7 @@ def new_category():
         newCategory = Category(name=request.form['name'],
                                user_id=login_session['user_id'])
         session.add(newCategory)
-        session.commit
+        session.commit()
         flash("new category created!")
         return redirect(url_for('categories_home'))
     else:
@@ -243,8 +247,13 @@ def new_category():
 @app.route('/<int:category_id>/edit/', methods=['GET', 'POST'])
 def edit_category(category_id):
     updatedCategory = session.query(Category).filter_by(id=category_id).one()
+    category = session.query(Category).filter_by(id=category_id).one()
     if 'username' not in login_session:
         return redirect('login')
+    creator = getUserInfo(category.user_id)
+    if creator.id != login_session['user_id']:
+        flash ("You cannot edit this category. This category belongs to %s" % creator.name)
+        return redirect(url_for('categories_home'))
     if request.method == 'POST':
         if request.form['name']:
             updatedCategory.name = request.form['name']
@@ -263,11 +272,17 @@ def edit_category(category_id):
 @app.route('/<int:category_id>/delete/', methods=['GET', 'POST'])
 def delete_category(category_id):
     deleteCategory = session.query(Category).filter_by(id=category_id).one()
+    category = session.query(Category).filter_by(id=category_id).one()
     if 'username' not in login_session:
         return redirect('login')
+    creator = getUserInfo(category.user_id)
+    if creator.id != login_session['user_id']:
+        flash ("You cannot delete this category. This category belongs to %s" % creator.name)
+        return redirect(url_for('categories_home'))
     if request.method == 'POST':
         session.delete(deleteCategory)
-        session.commit()
+        ()
+        session.close()
         flash("category deleted!")
         return redirect(url_for('categories_home'))
     else:
@@ -280,7 +295,11 @@ def delete_category(category_id):
 def category_items(category_id):
     category = session.query(Category).filter_by(id=category_id).one()
     items = session.query(CategoryItem).filter_by(category_id=category_id)
-    return render_template('category.html', category=category, items=items)
+    if 'username' not in login_session:
+        return render_template('public_category.html', category=category,\
+                               items=items)
+    else:
+        return render_template('category.html', category=category, items=items)
 
 
 # Page to add a new item to a specific category
@@ -308,8 +327,13 @@ def new_category_item(category_id):
 @app.route('/<int:category_id>/<int:item_id>/edit/', methods=['GET', 'POST'])
 def edit_category_item(category_id, item_id):
     updatedItem = session.query(CategoryItem).filter_by(id=item_id).one()
+    category = session.query(CategoryItem).filter_by(id=category_id).one()
     if 'username' not in login_session:
         return redirect('login')
+    creator = getUserInfo(category.category_id)
+    if creator.id != login_session['user_id']:
+        flash ("You cannot edit this category item. This category item belongs to %s" % creator.name)
+        return redirect(url_for('categories_home'))
     if request.method == 'POST':
         if request.form['name'] and request.form['description']:
             updatedItem.name = request.form['name']
@@ -341,8 +365,13 @@ def edit_category_item(category_id, item_id):
 @app.route('/<int:category_id>/<int:item_id>/delete/', methods=['GET', 'POST'])
 def delete_category_item(category_id, item_id):
     deletedItem = session.query(CategoryItem).filter_by(id=item_id).one()
+    category = session.query(Category).filter_by(id=category_id).one()
     if 'username' not in login_session:
         return redirect('login')
+    creator = getUserInfo(category.user_id)
+    if creator.id != login_session['user_id']:
+        flash ("You cannot delete this category item. This category item belongs to %s" % creator.name)
+        return redirect(url_for('categories_home'))
     if request.method == 'POST':
         session.delete(deletedItem)
         session.commit()
