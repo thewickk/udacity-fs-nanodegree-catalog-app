@@ -62,9 +62,16 @@ cd fullstack-nanodegree-vm/vagrant
 ## Instructions for starting the Virtual Machine, connecting to the database, and running the Python file
 
 * **Start the virtual machine**
-From your terminal, inside the vagrant subdirectory, run the command **vagrant up**. This will cause Vagrant to download the Linux operating system and install it. This may take quite a while (many minutes) depending on how fast your Internet connection is.
+From your terminal, inside the vagrant subdirectory, run the command **vagrant up**. This will cause Vagrant to download the Linux operating system and install it. This may take quite a while (many minutes) depending on how fast your Internet connection is:
+```bash
+vagrant up
+```
 
+* **SSH into the Vagrant environment**
 When vagrant up is finished running, you will get your shell prompt back. At this point, you can run **vagrant ssh** to log in to your newly installed Linux VM!
+```bash
+vagrant ssh
+```
 
 ## **Important!** *Python 3.7.1 is required in order for this application to run*
 ### **Please follow these steps to automate the installation and configuration of the Python 3.7.1 environment and launch the application:**
