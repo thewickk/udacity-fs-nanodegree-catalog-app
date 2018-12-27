@@ -31,9 +31,11 @@ print("********* DB Items Table ************")
 read_item = session.query(CategoryItem).all()
 for i in read_item:
     # print(i.id)
-    print(i.name)
-    print(i.category_id)
-    print(i.user_id)
+    print("Item Name: {}".format(i.name))
+    print("Item ID: {}".format(i.id))
+    print("Item category_id: {}".format(i.category_id))
+    print("Item user_id: {}".format(i.user_id))
+    print("\n")
 
 #Test for verify the last 5 recent item entries in our database
 print("********* Lateste 5 items ************")

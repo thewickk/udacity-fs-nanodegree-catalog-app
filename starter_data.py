@@ -20,11 +20,20 @@ session = DBSession()
 
 # Create dummy data to populate our app with starter data
 
-# Create a inital user:
+# Create inital users:
 user = User(
     name = 'Johnny Noname',
     email = 'thewickk@thewickk.com',
     picture = 'some_pic.jpg'
+)
+
+session.add(user)
+session.commit()
+
+user = User(
+    name = 'Jane Doe',
+    email = 'jandoe@aol.com',
+    picture = 'another_selfie.png'
 )
 
 session.add(user)
@@ -43,7 +52,8 @@ item = CategoryItem(
     name = 'Baseball Glove',
     description = 'A leather mitt for shagging fly balls!',
     creation_date = datetime.datetime.now(),
-    category = category,
+    category = category
+    # user = user
 )
 
 session.add(item)
@@ -54,6 +64,7 @@ item = CategoryItem(
     description = 'Metal spikes for extra traction',
     creation_date = datetime.datetime.now(),
     category = category
+    # user = user
 )
 
 session.add(item)
@@ -64,6 +75,7 @@ item = CategoryItem(
     description = 'Louisville Slugger for smashing home runs',
     creation_date = datetime.datetime.now(),
     category = category
+    # user = user
 )
 
 session.add(item)
@@ -83,6 +95,7 @@ item = CategoryItem(
     description = 'The lateste technology for the best performance!',
     creation_date = datetime.datetime.now(),
     category = category
+    # user = user
 )
 
 session.add(item)
@@ -93,17 +106,70 @@ item = CategoryItem(
     description = 'The lateste technology for the best performance!',
     creation_date = datetime.datetime.now(),
     category = category
+    # user = user
 )
 
 session.add(item)
 session.commit()
 
-
 # Camping Category and Items
 category = Category(
     name = 'Camping',
-    user_id = 1
+    user_id = 2
 )
 
 session.add(category)
+session.commit()
+
+item = CategoryItem(
+    name = 'Tent',
+    description = 'Portable protection',
+    creation_date = datetime.datetime.now(),
+    category = category
+    # user = user
+)
+
+session.add(item)
+session.commit()
+
+item = CategoryItem(
+    name = 'Compass',
+    description = 'Find you direction in any weather',
+    creation_date = datetime.datetime.now(),
+    category = category
+    # user = user
+)
+
+session.add(item)
+session.commit()
+
+# Golfing Category and Items
+category = Category(
+    name = 'Golf',
+    user_id = 2
+)
+
+session.add(category)
+session.commit()
+
+item = CategoryItem(
+    name = 'Golf Club',
+    description = 'Used for hitting golf balls',
+    creation_date = datetime.datetime.now(),
+    category = category
+    # user = user
+)
+
+session.add(item)
+session.commit()
+
+item = CategoryItem(
+    name = 'Golf Bag',
+    description = 'Used to carry golfing equipment',
+    creation_date = datetime.datetime.now(),
+    category = category
+    # user = user
+)
+
+session.add(item)
 session.commit()

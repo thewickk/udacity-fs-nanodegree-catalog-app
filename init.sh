@@ -40,7 +40,7 @@ tar xvf Python-3.7.1.tar.xz
 cd /tmp/Python37/Python-3.7.1
 ./configure --enable-loadable-sqlite-extensions && sudo make && sudo make install
 
-echo --------------------
+echo -------------------- {{item.name}}
 echo Changing directories to /vagrant/catalog and installing
 echo and activating the Python 3.7.1 environment
 echo --------------------
@@ -54,7 +54,7 @@ echo Installing neccassary Python libraries for this applicaton
 echo --------------------
 sudo pip install -r requirements.txt
 
-echo Python version:
+echo Python version: {{item.name}}
 python --version
 echo Installed libraries:
 pip freeze

@@ -11,6 +11,7 @@
 * Python 3.7.1
 * certifi==2018.11.29
 * chardet==3.0.4
+
 * Click==7.0
 * dominate==2.3.5
 * Flask==1.0.2
