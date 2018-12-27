@@ -14,7 +14,6 @@ from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 from flask import make_response
 
-
 app = Flask(__name__)
 Bootstrap(app)
 
@@ -23,7 +22,7 @@ CLIENT_ID = json.loads(
 APPLICATION_NAME = "Udacity FSND Catalog Project"
 
 engine = create_engine('sqlite:///database.db',
-                       connect_args={'check_same_thread':False})
+                       connect_args={'check_same_thread': False})
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -220,7 +219,8 @@ def categories_home():
     items = session.query(CategoryItem).order_by(CategoryItem.id.desc()).limit(
         5)
     if 'username' not in login_session:
-        return render_template('public_catalog.html', category=category, items=items )
+        return render_template('public_catalog.html', category=category,
+                               items=items)
     else:
         return render_template('catalog.html', category=category, items=items)
 
@@ -252,7 +252,9 @@ def edit_category(category_id):
         return redirect('login')
     creator = getUserInfo(category.user_id)
     if creator.id != login_session['user_id']:
-        flash ("You cannot edit this category. This category belongs to %s" % creator.name)
+        flash(
+            "You cannot edit this category. This category belongs to %s" %
+            creator.name)
         return redirect(url_for('categories_home'))
     if request.method == 'POST':
         if request.form['name']:
@@ -277,7 +279,9 @@ def delete_category(category_id):
         return redirect('login')
     creator = getUserInfo(category.user_id)
     if creator.id != login_session['user_id']:
-        flash ("You cannot delete this category. This category belongs to %s" % creator.name)
+        flash(
+            "You cannot delete this category. This category belongs to %s" %
+            creator.name)
         return redirect(url_for('categories_home'))
     if request.method == 'POST':
         session.delete(deleteCategory)
@@ -297,19 +301,21 @@ def category_items(category_id):
     a_category = session.query(Category).filter_by(id=category_id).one()
     creator = getUserInfo(category.user_id)
     if 'username' not in login_session:
-        return render_template('public_category.html', category=category, items=items)
-    elif 'username' in login_session and a_category.user_id != login_session['user_id']:
-            flash ("You can only view these category items. This category belongs to %s" % creator.name)
-            return render_template('public_category.html', category=category,\
-                                    items=items)
+        return render_template('public_category.html', category=category,
+                               items=items)
+    elif 'username' in login_session and a_category.user_id != \
+            login_session['user_id']:
+        flash("You can only view these category items. This category "
+              "belongs to %s" % creator.name)
+        return render_template('public_category.html', category=category,
+                               items=items)
     else:
         return render_template('category.html', category=category, items=items)
         creator = getUserInfo(a_category.category_id)
-    # TODO delete if app works
-    # if creator.id != login_session['user_id']:
-    #     flash ("You can only view these category items. This category belongs to %s" % creator.name)
-    #     return render_template('public_category.html', category=category,\
-    #                            items=items)
+    # TODO delete if app works if creator.id != login_session['user_id']:
+    # flash ("You can only view these category items. This category belongs
+    # to %s" % creator.name) return render_template('public_category.html',
+    # category=category,\ items=items)
 
 
 # Page to add a new item to a specific category
@@ -344,7 +350,8 @@ def edit_category_item(category_id, item_id):
         return redirect('login')
     creator = getUserInfo(item_user.user_id)
     if creator.id != login_session['user_id']:
-        flash ("You cannot edit this category item. This category item belongs to %s" % creator.name)
+        flash("You cannot edit this category item. This category item "
+              "belongs to %s" % creator.name)
         return redirect(url_for('categories_home'))
     if request.method == 'POST':
         if request.form['name'] and request.form['description']:
@@ -382,7 +389,8 @@ def delete_category_item(category_id, item_id):
         return redirect('login')
     creator = getUserInfo(category.user_id)
     if creator.id != login_session['user_id']:
-        flash ("You cannot delete this category item. This category item belongs to %s" % creator.name)
+        flash("You cannot delete this category item. This category item "
+              "belongs to %s" % creator.name)
         return redirect(url_for('categories_home'))
     if request.method == 'POST':
         session.delete(deletedItem)

@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 
-#Create our user table
+# Create our user table
 class User(Base):
     __tablename__ = 'user'
 
@@ -18,7 +18,7 @@ class User(Base):
     picture = Column(String(250))
 
 
-#Create our category table
+# Create our category table
 class Category(Base):
     __tablename__ = 'category'
 
@@ -27,7 +27,7 @@ class Category(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User, backref="category")
 
-#Create category data for our JSON endpoint
+    # Create category data for our JSON endpoint
     @property
     def serialize(self):
         """Return object data in easily serializeable format"""
@@ -38,7 +38,7 @@ class Category(Base):
         }
 
 
-#Create our category item table
+# Create our category item table
 class CategoryItem(Base):
     __tablename__ = 'item'
 
@@ -51,7 +51,7 @@ class CategoryItem(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User, backref="item")
 
-#Create category item data for our JSON endpoint
+    # Create category item data for our JSON endpoint
     def serialize(self):
         # Returns object data in easily serializable format
         return {
