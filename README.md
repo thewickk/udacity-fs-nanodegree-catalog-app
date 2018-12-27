@@ -51,6 +51,9 @@ You can download and unzip this file: [FSND-Virtual-Machine.zip](https://s3.amaz
 Alternately, you can use Github to fork and clone the repository [https://github.com/udacity/fullstack-nanodegree-vm](https://github.com/udacity/fullstack-nanodegree-vm).
 
 Either way, you will end up with a new directory containing the VM files. Change to this directory in your terminal with **cd**. Inside, you will find another directory called vagrant. Change directory to the vagrant directory:
+```bash
+cd /vagrant 
+```
 
 ## Instructions for starting the Virtual Machine, connecting to the database, and running the Python file
 
