@@ -103,7 +103,7 @@ session.commit()
 
 item = CategoryItem(
     name = 'Wetsuit',
-    description = 'The lateste technology for the best performance!',
+    description = 'Helps keep you warm in cold water weather',
     creation_date = datetime.datetime.now(),
     category = category
     # user = user
@@ -123,7 +123,7 @@ session.commit()
 
 item = CategoryItem(
     name = 'Tent',
-    description = 'Portable protection',
+    description = 'Portable shelter',
     creation_date = datetime.datetime.now(),
     category = category
     # user = user
@@ -134,7 +134,7 @@ session.commit()
 
 item = CategoryItem(
     name = 'Compass',
-    description = 'Find you direction in any weather',
+    description = 'Find your direction in any weather',
     creation_date = datetime.datetime.now(),
     category = category
     # user = user

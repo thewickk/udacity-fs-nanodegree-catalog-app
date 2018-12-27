@@ -9,10 +9,10 @@
 			method="post">
 
 				<p>Name:</p>
-					<input type="text" size='30' name="name" placeholder="Edit {{item.name}}">
+					<input type="text" size='30' name="name" placeholder="Edit {{item.name}}" required>
 				<p>Description:</p>
 					<textarea name="description" rows="8" cols="50"
-					placeholder="Add/Edit Item Description" required></textarea>
+					placeholder="Add/Edit Item Description"></textarea>
 					<br>
 					<input type="submit" value="Edit">
 				<a href="{{ url_for('category_items', category_id=category_id) }}">Cancel</a>
